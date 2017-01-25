@@ -1,21 +1,20 @@
 <?php
-$con = mysqli_connect("localhost","id553952_cindysbakery","09085139083","id553952_cindysbakery");
+$con = mysqli_connect("cindysbakery.000webhostapp.com","id553952_cindysbakery","09085139083","id553952_loginregistercindys");
 
 
 $name = $_POST["name"];
-$address = $_POST["address"];
-$number = $_POST["number"];
+$password = $_POST["password"];
 $email = $_POST["email"];
+$birthday = $_POST["birthday"];
+$mgender = $_POST["mgender"];
+$fgender = $_POST["fgender"];
 
-$statement = mysqli_prepare($con,"INSERT INTO user (name, address,email,number) VALUES(?,?,?,?)");
-mysqli_stmt_bind_param($statement, "siss", $name, $address, $number, $email);
+$statement = mysqli_prepare($con,"INSERT INTO cindy (name, email,password, birthday, fgender, mgender) VALUES(?,?,?,?,?)");
+mysqli_stmt_bind_param($statement, "siss", $name, $password,$email, $birthday, $mgender,$fgender);
 mysqli_stmt_execute($statement);
-
-mysqli_stmt_store_result($statement);
-mysqli_stmt_bind_result($statement, $user_id, $name, $number, $email, $address);
 
 $response = array();
 $response["success"] = true;
 
-echo json_decode($response);
+echo json_encode($response);
 ?>
